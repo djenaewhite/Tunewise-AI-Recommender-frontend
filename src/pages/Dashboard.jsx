@@ -22,7 +22,7 @@ export default function Dashboard() {
     }
 
     const timeout = setTimeout(() => {
-      fetch(`http://127.0.0.1:10000/search?q=${encodeURIComponent(search)}`)
+      fetch(`${import.meta.env.VITE_API_URL}/search?q=${encodeURIComponent(search)}`)
         .then((res) => res.json())
         .then((data) => setResults(data || []))
         .catch((err) => console.error(err));
@@ -60,7 +60,7 @@ export default function Dashboard() {
     try {
       const songNames = songs.map((s) => s.name);
 
-      const res = await fetch("http://127.0.0.1:10000/recommend", {
+     const res = await fetch(`${import.meta.env.VITE_API_URL}/recommend`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ songs: songNames }),
